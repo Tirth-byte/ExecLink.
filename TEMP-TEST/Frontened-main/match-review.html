@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EXECLink Match Review | IOCL Paradip Petrochemical Complex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="match-review.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       VIEWPORT RESOLUTION PREVIEW BAR & STATE TESTER
+       ========================================================================= -->
+  <aside class="viewport-tester-bar" aria-label="Resolution tester, state toggles, and navigation">
+    <span class="label">Viewport:</span>
+    <button class="viewport-btn active" data-preset="auto" title="Fit to 100% viewport">Auto (Fit)</button>
+    <button class="viewport-btn" data-preset="1600x1000" title="Simulate 1600 x 1000 desktop viewport">1600 × 1000</button>
+    <button class="viewport-btn" data-preset="1440x900" title="Simulate 1440 x 900 standard laptop viewport">1440 × 900</button>
+    <button class="viewport-btn" data-preset="1280x800" title="Simulate 1280 x 800 compact desktop viewport">1280 × 800</button>
+
+    <div class="state-switcher-group">
+      <span class="label">UI State:</span>
+      <select id="stateToggleSelect" class="state-toggle-select" aria-label="Toggle UI State for validation">
+        <option value="success">Success (Decision Ready)</option>
+        <option value="loading">Loading State</option>
+        <option value="empty">Empty Queue</option>
+        <option value="error">API Error State</option>
+        <option value="no_selection">No Selection</option>
+      </select>
+    </div>
+
+    <div style="margin-left: 8px; padding-left: 8px; border-left: 1px solid var(--border-subtle); display:flex; gap:6px;">
+      <a href="index.html" class="nav-page-link-pill" title="Return to Executive Overview">
+        Overview
+      </a>
+      <a href="field-updates.html" class="nav-page-link-pill" title="Return to Field Updates Board">
+        Field Updates
+      </a>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       MAIN CANVAS CONTAINER (8-12px outer margin, 24-28px radius, ~98% viewport)
+       ========================================================================= -->
+  <main class="command-center-canvas" id="commandCanvas" role="application">
+
+    <!-- =======================================================================
+         SHARED APPLICATION SIDEBAR
+         ======================================================================= -->
+    <nav class="app-sidebar" id="appSidebar" aria-label="Primary navigation rail">
+      <!-- Brand Logo / Complex Identification -->
+      <div class="sidebar-brand">
+        <div class="brand-badge">
+          <div class="brand-icon-box" title="Indian Oil Corporation Limited">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="brand-text-block">
+            <span class="brand-title">
+              KINETIC
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+            <span class="brand-subtitle">Project Control</span>
+          </div>
+        </div>
+        <button class="sidebar-collapse-btn" id="collapseSidebarBtn" title="Toggle sidebar view" aria-label="Toggle sidebar view">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <line x1="9" y1="3" x2="9" y2="21"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Quick Search / Command Palette Shortcut -->
+      <div class="sidebar-search">
+        <div class="search-input-wrap" role="button" tabindex="0" title="Quick Search (Ctrl + K)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <span>Search controls...</span>
+          <kbd class="search-kbd">⌘K</kbd>
+        </div>
+      </div>
+
+      <!-- Main Navigation Menu -->
+      <div class="nav-group-title">Command Center</div>
+      <ul class="nav-list" role="menubar">
+        <li class="nav-item" role="none">
+          <a href="index.html" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="field-updates.html" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+              <polyline points="2 17 12 22 22 17"/>
+              <polyline points="2 12 12 17 22 12"/>
+            </svg>
+            <span>Field Updates</span>
+          </a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="index.html#project-control" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+            <span>Project Control</span>
+          </a>
+        </li>
+        <!-- ACTIVE PAGE: Match Review -->
+        <li class="nav-item active" role="none">
+          <a href="match-review.html" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span>Match Review</span>
+            <span class="nav-badge-pill" id="matchNavBadge">EXECLink</span>
+          </a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="index.html#view-schedule" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span>Schedule Baseline</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Management & Audit Section -->
+      <div class="nav-group-title">Governance</div>
+      <ul class="nav-list" role="menubar">
+        <li class="nav-item" role="none">
+          <a href="#revisions" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            <span>Baseline Rev-04</span>
+          </a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="#audit" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>Compliance & Audit</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Telemetry Status Card -->
+      <div class="sidebar-footer">
+        <div class="gateway-status-card">
+          <div class="gateway-status-header">
+            <span class="gateway-indicator">
+              <span class="pulse-dot"></span>
+              EXECLink Online
+            </span>
+            <span style="font-size:9px; font-weight:700; color:#34d399; background:rgba(16,185,129,0.15); padding:1px 5px; border-radius:4px;">SYNC</span>
+          </div>
+          <p class="gateway-status-desc">
+            Algorithmic signal matching connected to EPCC-03 L5 schedule actuals.
+          </p>
+        </div>
+      </div>
+    </nav>
+
+    <!-- =======================================================================
+         MAIN WORKSPACE: THREE-ZONE DECISION CONSOLE
+         ======================================================================= -->
+    <div class="app-main">
+
+      <!-- Shared Topbar Header -->
+      <header class="app-topbar">
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+          <a href="index.html" class="breadcrumb-item">IOCL Paradip</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="index.html" class="breadcrumb-item">Unit B Expansion</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="field-updates.html" class="breadcrumb-item">Field Updates</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Match Review</span>
+        </nav>
+
+        <div class="topbar-actions">
+          <div class="filter-pill-dropdown" title="Active baseline version">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 14 14"></polyline>
+            </svg>
+            <span>Baseline: Rev-04</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+
+          <div class="filter-pill-dropdown" title="Current reporting cycle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+            </svg>
+            <span>Week 38 Cutoff</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+
+          <div class="user-profile-badge" title="Lead Project Controls Director">
+            <div class="user-avatar">RS</div>
+            <div class="user-name-text">
+              Rajesh Sharma
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Console Workspace Sub-header -->
+      <section class="console-header-bar" aria-label="Console header">
+        <div class="console-title-wrap">
+          <span class="console-badge-tag">EXECLink Decision Console</span>
+          <h1 class="console-main-title">Schedule Activity Match Review</h1>
+        </div>
+
+        <div class="console-doctrine-tag">
+          <span>Operational Rule:</span>
+          <strong>MACHINE RECOMMENDS. PLANNER DECIDES.</strong>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           THREE-ZONE CONSOLE BODY
+           Zone 1: Review Queue (~24%)
+           Zone 2: Field Evidence (~40%)
+           Zone 3: Machine Recommendation & Planner Decision (~36%)
+           ===================================================================== -->
+      <div class="three-zone-console-layout" id="consoleLayoutArea">
+
+        <!-- -------------------------------------------------------------------
+             ZONE 1: REVIEW QUEUE (LEFT)
+             ------------------------------------------------------------------- -->
+        <section class="console-zone-column" aria-label="Review Queue">
+          <header class="zone-header-bar">
+            <div class="zone-title-group">
+              <h2 class="zone-title">Review Queue</h2>
+              <span class="zone-count-badge" id="queuePendingCount">2 Pending</span>
+            </div>
+          </header>
+
+          <!-- Queue Search & Filters -->
+          <div class="queue-controls-strip">
+            <input 
+              type="text" 
+              id="queueSearchInput" 
+              class="queue-search-input" 
+              placeholder="Filter queue by ID, asset, or task..."
+              autocomplete="off"
+            >
+            <div class="queue-filter-pills" role="tablist">
+              <button class="queue-filter-pill-btn active" data-filter="pending">Pending</button>
+              <button class="queue-filter-pill-btn" data-filter="verified">Verified</button>
+              <button class="queue-filter-pill-btn" data-filter="all">All</button>
+            </div>
+          </div>
+
+          <!-- Cards Scrollable Area -->
+          <div class="queue-cards-scrollable" id="queueCardsList">
+            <!-- Populated via match-review.js -->
+          </div>
+        </section>
+
+        <!-- -------------------------------------------------------------------
+             ZONE 2: FIELD EVIDENCE (CENTER)
+             ------------------------------------------------------------------- -->
+        <section class="console-zone-column" aria-label="Field Evidence">
+          <header class="zone-header-bar">
+            <div class="zone-title-group">
+              <h2 class="zone-title">Field Evidence</h2>
+              <span class="zone-count-badge" style="background:rgba(255,255,255,0.06); color:#cbd5e1;">INTAKE EVIDENCE</span>
+            </div>
+            <span style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono);">
+              IOCL EPCC-03 SITE HOOK
+            </span>
+          </header>
+
+          <div class="evidence-scrollable-content" id="evidenceContentContainer">
+            <!-- Populated via match-review.js -->
+          </div>
+        </section>
+
+        <!-- -------------------------------------------------------------------
+             ZONE 3: MACHINE RECOMMENDATION & PLANNER DECISION (RIGHT)
+             ------------------------------------------------------------------- -->
+        <section class="console-zone-column" aria-label="Machine Recommendation and Decisions">
+          <header class="zone-header-bar">
+            <div class="zone-title-group">
+              <h2 class="zone-title" style="color:#93c5fd;">Machine Recommendation</h2>
+              <span class="zone-count-badge" style="background:rgba(59,130,246,0.18); color:#93c5fd;">EXECLink ENGINE</span>
+            </div>
+          </header>
+
+          <div class="recommendation-scrollable-content" id="recommendationContentContainer">
+            <!-- Populated via match-review.js -->
+          </div>
+
+          <!-- Planner Controls Deck (Anchored at Bottom of Zone 3) -->
+          <footer class="planner-controls-deck" id="plannerControlsDeck">
+            <!-- Rendered dynamically via match-review.js -->
+          </footer>
+        </section>
+
+      </div>
+
+      <!-- State Overlay (Loading, Error, Empty, No Selection) -->
+      <div class="state-overlay-container" id="stateOverlayContainer">
+        <!-- Injected dynamically -->
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       MODAL 1: SEARCHABLE SCHEDULE ACTIVITY PICKER ("Choose Different Activity")
+       ========================================================================= -->
+  <div class="modal-scrim-backdrop" id="schedulePickerModal" role="dialog" aria-modal="true" aria-labelledby="scheduleModalTitle">
+    <div class="modal-content-card">
+      <header class="modal-header">
+        <h3 class="modal-title" id="scheduleModalTitle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+          </svg>
+          Select L5/L6 Schedule Activity Target
+        </h3>
+        <button id="closeSchedulePickerBtn" style="background:transparent; border:none; color:#94a3b8; font-size:16px; cursor:pointer;">✕</button>
+      </header>
+
+      <div class="modal-body">
+        <input 
+          type="text" 
+          id="scheduleSearchInput" 
+          placeholder="Search by Activity Code, Title, Discipline, or WBS path..." 
+          style="background:rgba(255,255,255,0.06); border:1px solid var(--border-medium); border-radius:8px; padding:10px 14px; font-size:12.5px; color:#fff; outline:none;"
+        >
+        <div id="scheduleActivitiesList" style="display:flex; flex-direction:column; gap:8px;">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <span style="font-size:11px; color:#64748b; margin-right:auto;">IOCL Paradip Rev-04 Approved Baseline</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: REGRESSION PROTECTION ALERT & OVERRIDE CONFIRMATION
+       ========================================================================= -->
+  <div class="modal-scrim-backdrop" id="regressionWarningModal" role="dialog" aria-modal="true" aria-labelledby="regModalTitle">
+    <div class="modal-content-card" style="border-color: rgba(245,158,11,0.5);">
+      <header class="modal-header" style="background:#1f1911; border-color:rgba(245,158,11,0.3);">
+        <h3 class="modal-title" id="regModalTitle" style="color:#fbbf24;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          Regression Protection Triggered
+        </h3>
+      </header>
+
+      <div class="modal-body">
+        <div class="regression-warning-banner">
+          <strong>CRITICAL SCHEDULE INTEGRITY WARNING:</strong>
+          <span>
+            Approving this update will cause a progress regression on schedule activity:
+          </span>
+          <div id="regActivityCode" style="font-family:var(--font-mono); font-weight:700; color:#fff; margin-top:4px;"></div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; background:rgba(0,0,0,0.3); padding:10px; border-radius:8px;">
+          <div>
+            <span style="font-size:10.5px; color:#94a3b8; text-transform:uppercase;">Existing Verified Progress</span>
+            <div id="regExistingVal" style="font-family:var(--font-mono); font-size:20px; font-weight:700; color:#f87171;">75%</div>
+          </div>
+          <div>
+            <span style="font-size:10.5px; color:#94a3b8; text-transform:uppercase;">Proposed Resulting Progress</span>
+            <div id="regProposedVal" style="font-family:var(--font-mono); font-size:20px; font-weight:700; color:#fbbf24;">60%</div>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-size:11px; font-weight:600; color:#cbd5e1;">Engineering Override Justification (Required for Audit Trail):</label>
+          <textarea 
+            id="regressionReasonInput" 
+            placeholder="Document rationale for scope reduction / physical joint recalibration..." 
+            rows="3" 
+            style="background:rgba(255,255,255,0.06); border:1px solid var(--border-medium); border-radius:6px; padding:8px; font-size:12px; color:#fff; outline:none; resize:none;"
+          ></textarea>
+        </div>
+      </div>
+
+      <footer class="modal-footer" style="background:#1f1911; border-color:rgba(245,158,11,0.3);">
+        <button id="cancelRegressionBtn" class="planner-action-btn secondary-btn" style="flex:none; padding:6px 12px;">Cancel</button>
+        <button id="confirmRegressionOverrideBtn" class="planner-action-btn" style="flex:none; background:#d97706; border-color:#f59e0b; color:#fff; padding:6px 14px;">
+          Acknowledge & Confirm Override
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 3: REJECTION REASON PROMPT
+       ========================================================================= -->
+  <div class="modal-scrim-backdrop" id="rejectReasonModal" role="dialog" aria-modal="true" aria-labelledby="rejectModalTitle">
+    <div class="modal-content-card" style="border-color: rgba(239,68,68,0.5);">
+      <header class="modal-header" style="background:#201214; border-color:rgba(239,68,68,0.3);">
+        <h3 class="modal-title" id="rejectModalTitle" style="color:#f87171;">
+          Reject Field Update
+        </h3>
+      </header>
+
+      <div class="modal-body">
+        <p style="font-size:12px; color:#cbd5e1;">
+          Please enter the engineering rationale for rejecting this field submission. This will be recorded in the EPCC-03 compliance audit log and notified to the field supervisor.
+        </p>
+        <textarea 
+          id="rejectReasonText" 
+          placeholder="e.g., Radiography density inspection failed ASME Sec IX; spool IDs do not match drawing..." 
+          rows="3" 
+          style="background:rgba(255,255,255,0.06); border:1px solid var(--border-medium); border-radius:6px; padding:8px; font-size:12px; color:#fff; outline:none; resize:none;"
+        ></textarea>
+      </div>
+
+      <footer class="modal-footer" style="background:#201214; border-color:rgba(239,68,68,0.3);">
+        <button id="cancelRejectBtn" class="planner-action-btn secondary-btn" style="flex:none; padding:6px 12px;">Cancel</button>
+        <button id="confirmRejectBtn" class="planner-action-btn reject-btn" style="flex:none; padding:6px 14px;">
+          Confirm Rejection
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="match-review.js"></script>
+</body>
+</html>

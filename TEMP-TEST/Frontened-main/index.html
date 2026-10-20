@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IOCL Paradip Petrochemical Complex | Project Control Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       VIEWPORT RESOLUTION PREVIEW BAR (Ensures 1600x1000, 1440x900, 1280x800 Validation)
+       ========================================================================= -->
+  <aside class="viewport-tester-bar" aria-label="Resolution tester and integrity controls">
+    <span class="label">Viewport Preset:</span>
+    <button class="viewport-btn active" data-preset="auto" title="Fit to 100% current viewport">Auto (Fit)</button>
+    <button class="viewport-btn" data-preset="1600x1000" title="Simulate 1600 x 1000 desktop viewport">1600 × 1000</button>
+    <button class="viewport-btn" data-preset="1440x900" title="Simulate 1440 x 900 standard laptop viewport">1440 × 900</button>
+    <button class="viewport-btn" data-preset="1280x800" title="Simulate 1280 x 800 compact desktop viewport">1280 × 800</button>
+
+    <div class="integrity-toggle-wrap">
+      <button id="toggleDataModeBtn" class="toggle-switch-btn strict" title="Toggle between strict empty state and demo simulated telemetry feed">
+        <span class="dot"></span>
+        <span id="modeStatusText">Strict Telemetry Pending (—)</span>
+      </button>
+    </div>
+
+    <div style="margin-left: 8px; padding-left: 8px; border-left: 1px solid var(--border-subtle); display:flex; align-items:center; gap:6px;">
+      <a href="field-updates.html" style="display:flex; align-items:center; gap:5px; color:#93c5fd; text-decoration:none; font-weight:600; font-size:11px; padding:3px 8px; border-radius:6px; background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); transition:all 0.15s ease;" title="Navigate to the Field Updates operational workspace">
+        Field Updates →
+      </a>
+      <a href="match-review.html" style="display:flex; align-items:center; gap:5px; color:#38bdf8; text-decoration:none; font-weight:600; font-size:11px; padding:3px 8px; border-radius:6px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.3); transition:all 0.15s ease;" title="Navigate to EXECLink Match Review console">
+        Match Review →
+      </a>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       MAIN CANVAS CONTAINER (8-12px outer margin, 24-28px radius, ~98% viewport)
+       ========================================================================= -->
+  <main class="command-center-canvas" id="commandCanvas" role="application">
+    
+    <!-- =======================================================================
+         LEFT NAVIGATION SIDEBAR (Enterprise Control Rail from Reference Image)
+         ======================================================================= -->
+    <nav class="app-sidebar" id="appSidebar" aria-label="Primary navigation rail">
+      <!-- Brand Logo / Complex Identification -->
+      <div class="sidebar-brand">
+        <div class="brand-badge">
+          <div class="brand-icon-box" title="Indian Oil Corporation Limited">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="brand-text-block">
+            <span class="brand-title">
+              KINETIC
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+            <span class="brand-subtitle">Project Control</span>
+          </div>
+        </div>
+        <button class="sidebar-collapse-btn" id="collapseSidebarBtn" title="Toggle sidebar view" aria-label="Toggle sidebar view">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <line x1="9" y1="3" x2="9" y2="21"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Quick Search / Command Palette Shortcut -->
+      <div class="sidebar-search">
+        <div class="search-input-wrap" id="sidebarSearchWrap" role="button" tabindex="0" title="Quick Search (Ctrl + K)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <span>Search controls...</span>
+          <kbd class="search-kbd">⌘K</kbd>
+        </div>
+      </div>
+
+      <!-- Main Navigation Menu -->
+      <div class="nav-group-title">Command Center</div>
+      <ul class="nav-list" role="menubar">
+        <li class="nav-item active" role="none">
+          <a href="#overview" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="field-updates.html" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+              <polyline points="2 17 12 22 22 17"/>
+              <polyline points="2 12 12 17 22 12"/>
+            </svg>
+            <span>Field Updates</span>
+            <span class="nav-badge-pill" id="fieldNavBadge">Sync</span>
+          </a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="#project-control" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+            <span>Project Control</span>
+          </a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="match-review.html" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span>Match Intelligence</span>
+          </a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="#schedule" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span>Schedule Baseline</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Management & System Audit Section -->
+      <div class="nav-group-title">Governance</div>
+      <ul class="nav-list" role="menubar">
+        <li class="nav-item" role="none">
+          <a href="#revisions" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            <span>Baseline Rev-04</span>
+          </a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="#audit" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>Compliance & Audit</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Telemetry Gateway & Live System Status -->
+      <div class="sidebar-footer">
+        <div class="gateway-status-card">
+          <div class="gateway-status-header">
+            <span class="gateway-indicator">
+              <span class="pulse-dot"></span>
+              Paradip Gateway
+            </span>
+            <span class="spi-value-badge" style="font-size:9px; padding:1px 5px;">LIVE</span>
+          </div>
+          <p class="gateway-status-desc">
+            Direct telemetry hook to EPCC-03 site servers.
+          </p>
+          <button class="support-action-btn" id="pingTelemetryBtn">Ping Field Server</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- =======================================================================
+         MAIN VIEWPORT WORKSPACE
+         ======================================================================= -->
+    <div class="app-main">
+      
+      <!-- Top Header / Breadcrumb / Executive User Bar -->
+      <header class="app-topbar">
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+          <a href="#" class="breadcrumb-item">IOCL Paradip</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="#" class="breadcrumb-item">Unit B Expansion</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Overview</span>
+        </nav>
+
+        <div class="topbar-actions">
+          <!-- Baseline Selector Pill -->
+          <div class="filter-pill-dropdown" title="Active baseline version">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 14 14"></polyline>
+            </svg>
+            <span>Baseline: Rev-04</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+
+          <!-- Cutoff Period Pill -->
+          <div class="filter-pill-dropdown" title="Current reporting cycle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+            </svg>
+            <span>Week 38 Cutoff</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+
+          <!-- Executive User Profile -->
+          <div class="user-profile-badge" title="Authenticated Executive">
+            <div class="user-avatar">RS</div>
+            <div class="user-name-text">
+              Rajesh Sharma
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Scrollable Canvas Body -->
+      <section class="dashboard-content-area" aria-label="Executive Overview Command Center">
+
+        <!-- =====================================================================
+             MAIN HERO - CINEMATIC INDUSTRIAL COMMAND SECTION
+             Upper portion with photorealistic refinery hero backdrop + dark scrims
+             ===================================================================== -->
+        <div class="hero-command-section">
+          <!-- Industrial Refinery Backdrop -->
+          <div class="hero-image-backdrop" aria-hidden="true"></div>
+          <div class="hero-scrim-overlay" aria-hidden="true"></div>
+
+          <!-- Hero Content Layer -->
+          <div class="hero-inner-content">
+            
+            <!-- LEFT SIDE: Project Name, Phase, and Concise Metadata -->
+            <div class="hero-left-column">
+              <div class="hero-heading-block">
+                <div class="hero-page-label">Overview</div>
+                <h1 class="hero-project-name">IOCL Paradip Petrochemical Complex</h1>
+                <div class="hero-project-phase">
+                  <span>Unit B Expansion</span>
+                  <span class="phase-pill">EPCC-03 Cracker</span>
+                </div>
+              </div>
+
+              <!-- Concise Executive Metadata Row -->
+              <div class="hero-metadata-grid">
+                <div class="meta-item">
+                  <span class="meta-label">Contractor</span>
+                  <span class="meta-value" title="L&T Hydrocarbon Engineering">L&T Hydrocarbon</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Target COD</span>
+                  <span class="meta-value">Q4 2026</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Baseline</span>
+                  <span class="meta-value">Rev-04 (Approved)</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Cutoff Cycle</span>
+                  <span class="meta-value">Week 38 (Monthly)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT SIDE: PHYSICAL PROGRESS DARK GLASS PANEL -->
+            <!-- Transparent but highly readable dark glass panel -->
+            <div class="hero-right-column">
+              <div class="physical-progress-panel" aria-label="Physical Progress Summary">
+                <div class="panel-header-row">
+                  <span class="panel-title-text">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                    Physical Progress
+                  </span>
+                  <span class="panel-data-date">
+                    Data Date: <strong id="metricDataDate">—</strong>
+                  </span>
+                </div>
+
+                <!-- Primary Metric Triad: Verified Actual vs Planned vs Variance -->
+                <div class="progress-metrics-triad">
+                  <!-- Verified Actual -->
+                  <div class="metric-block actual">
+                    <span class="metric-caption">Verified Actual</span>
+                    <span class="metric-val-large" id="metricActual">—</span>
+                  </div>
+
+                  <!-- Planned -->
+                  <div class="metric-block planned">
+                    <span class="metric-caption">Planned</span>
+                    <span class="metric-val-large" id="metricPlanned">—</span>
+                  </div>
+
+                  <!-- Variance -->
+                  <div class="metric-block variance">
+                    <span class="metric-caption">Variance</span>
+                    <span class="metric-val-large" id="metricVariance">—</span>
+                  </div>
+                </div>
+
+                <!-- Visual Bar Comparison -->
+                <div class="progress-visual-bar-wrap">
+                  <div class="progress-track-container" title="Visual comparison of Verified Actual vs Planned target">
+                    <div class="progress-bar-fill-actual" id="progressFillActual"></div>
+                    <div class="progress-bar-target-marker" id="targetMarker" title="Planned Baseline Target"></div>
+                  </div>
+                </div>
+
+                <!-- SPI & Data Integrity Row -->
+                <div class="panel-footer-row">
+                  <div class="spi-badge-container">
+                    <span class="spi-label">SPI:</span>
+                    <span class="spi-value-badge" id="metricSpi">—</span>
+                  </div>
+                  <span class="integrity-watermark-tag">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="16" x2="12" y2="12"></line>
+                      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    Strict Data Integrity
+                  </span>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- =====================================================================
+             BOTTOM MODULES - FOUR EQUAL-WIDTH EXECUTIVE CARDS
+             1. Verification Flow
+             2. Discipline Control
+             3. Match Intelligence (BLUE accent)
+             4. Critical Watch (Baseline-marked critical activities)
+             ===================================================================== -->
+        <div class="bottom-modules-grid">
+
+          <!-- -----------------------------------------------------------------
+               CARD 1: VERIFICATION FLOW
+               Fields: Captured, Awaiting Review, Verified, Unmatched, Rejected
+               Action: Go to Field Updates →
+               ----------------------------------------------------------------- -->
+          <article class="executive-card" aria-label="Verification Flow Module">
+            <header class="card-top-header">
+              <div class="card-title-group">
+                <h2 class="card-title">Verification Flow</h2>
+                <span class="card-info-icon" data-tooltip="Operational field record verification audit">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                </span>
+              </div>
+              <span class="card-header-badge">Field Audit</span>
+            </header>
+
+            <div class="card-body">
+              <!-- Real-count Fields Grid -->
+              <div class="flow-counts-grid">
+                <div class="flow-count-cell" title="Total raw records captured from field">
+                  <span class="flow-count-val" id="flowCaptured">—</span>
+                  <span class="flow-count-label">Captured</span>
+                </div>
+                <div class="flow-count-cell awaiting" title="Records awaiting engineer review">
+                  <span class="flow-count-val" id="flowAwaiting">—</span>
+                  <span class="flow-count-label">Awaiting</span>
+                </div>
+                <div class="flow-count-cell verified" title="Verified against physical inspection">
+                  <span class="flow-count-val" id="flowVerified">—</span>
+                  <span class="flow-count-label">Verified</span>
+                </div>
+                <div class="flow-count-cell" title="Unmatched field entities">
+                  <span class="flow-count-val" id="flowUnmatched">—</span>
+                  <span class="flow-count-label">Unmatch</span>
+                </div>
+                <div class="flow-count-cell rejected" title="Rejected field updates">
+                  <span class="flow-count-val" id="flowRejected">—</span>
+                  <span class="flow-count-label">Rejected</span>
+                </div>
+              </div>
+
+              <!-- Compact Operational Status Summary -->
+              <div class="flow-status-banner">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 14 14"></polyline>
+                </svg>
+                <span id="flowStatusBannerText">Telemetry ingestion pending for Cutoff Week 38</span>
+              </div>
+            </div>
+
+            <footer class="card-action-footer">
+              <a href="field-updates.html" class="card-action-link">
+                Go to Field Updates
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </footer>
+          </article>
+
+          <!-- -----------------------------------------------------------------
+               CARD 2: DISCIPLINE CONTROL
+               Planned vs Verified discipline performance: Civil, Piping, Electrical, Equipment
+               Action: Go to Project Control →
+               ----------------------------------------------------------------- -->
+          <article class="executive-card" aria-label="Discipline Control Module">
+            <header class="card-top-header">
+              <div class="card-title-group">
+                <h2 class="card-title">Discipline Control</h2>
+                <span class="card-info-icon" data-tooltip="Planned baseline vs verified physical performance by discipline">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                </span>
+              </div>
+              <span class="card-header-badge">Performance</span>
+            </header>
+
+            <div class="card-body">
+              <!-- Disciplines Comparison Rows -->
+              <div class="discipline-rows-wrap" id="disciplineRowsContainer">
+                <!-- Injected dynamically via app.js -->
+              </div>
+            </div>
+
+            <footer class="card-action-footer">
+              <a href="#project-control" class="card-action-link">
+                Go to Project Control
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </footer>
+          </article>
+
+          <!-- -----------------------------------------------------------------
+               CARD 3: MATCH INTELLIGENCE
+               BLUE ACCENT!
+               Pending-match confidence: —
+               Weights: Asset 30%, Discipline 20%, Location 20%, Work Type 15%, Text 15%
+               Action: Review Matches →
+               ----------------------------------------------------------------- -->
+          <article class="executive-card match-card" aria-label="Match Intelligence Module">
+            <header class="card-top-header">
+              <div class="card-title-group">
+                <h2 class="card-title" style="color:#93c5fd;">Match Intelligence</h2>
+                <span class="card-info-icon" data-tooltip="AI matching algorithm signal breakdown and confidence scoring">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                </span>
+              </div>
+              <span class="card-header-badge" style="color:#93c5fd; border-color:rgba(59,130,246,0.3); background:rgba(59,130,246,0.1);">
+                Blue Engine
+              </span>
+            </header>
+
+            <div class="card-body">
+              <!-- Pending-Match Confidence Score Box -->
+              <div class="match-confidence-summary">
+                <span class="match-confidence-label" id="matchConfidenceLabel">Pending Match Confidence</span>
+                <span class="match-confidence-val" id="matchConfidenceVal">—</span>
+              </div>
+
+              <!-- 5 Exact Matching Signals Breakdown (Asset 30%, Discipline 20%, Location 20%, Work Type 15%, Text 15%) -->
+              <div class="signals-weighted-container">
+                <!-- Segmented Proportional Bar -->
+                <div class="signals-proportional-bar" title="Asset 30% | Discipline 20% | Location 20% | Work Type 15% | Text 15%">
+                  <div class="signal-bar-segment asset" data-tooltip="Asset: 30%"></div>
+                  <div class="signal-bar-segment discipline" data-tooltip="Discipline: 20%"></div>
+                  <div class="signal-bar-segment location" data-tooltip="Location: 20%"></div>
+                  <div class="signal-bar-segment worktype" data-tooltip="Work Type: 15%"></div>
+                  <div class="signal-bar-segment text" data-tooltip="Text: 15%"></div>
+                </div>
+
+                <!-- Weighted Signal Legend Grid -->
+                <div class="signals-breakdown-list">
+                  <div class="signal-pill-item">
+                    <span class="signal-dot-name">
+                      <span class="signal-color-dot asset"></span>
+                      Asset
+                    </span>
+                    <span class="signal-pct-val">30%</span>
+                  </div>
+                  <div class="signal-pill-item">
+                    <span class="signal-dot-name">
+                      <span class="signal-color-dot discipline"></span>
+                      Discipline
+                    </span>
+                    <span class="signal-pct-val">20%</span>
+                  </div>
+                  <div class="signal-pill-item">
+                    <span class="signal-dot-name">
+                      <span class="signal-color-dot location"></span>
+                      Location
+                    </span>
+                    <span class="signal-pct-val">20%</span>
+                  </div>
+                  <div class="signal-pill-item">
+                    <span class="signal-dot-name">
+                      <span class="signal-color-dot worktype"></span>
+                      Work Type
+                    </span>
+                    <span class="signal-pct-val">15%</span>
+                  </div>
+                  <div class="signal-pill-item" style="grid-column: span 2;">
+                    <span class="signal-dot-name">
+                      <span class="signal-color-dot text"></span>
+                      Text Matching
+                    </span>
+                    <span class="signal-pct-val">15%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <footer class="card-action-footer">
+              <a href="match-review.html" class="card-action-link" style="color:#93c5fd;">
+                Review Matches
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </footer>
+          </article>
+
+          <!-- -----------------------------------------------------------------
+               CARD 4: CRITICAL WATCH
+               Baseline-marked critical activities and progress variance.
+               Terminology: "Baseline-marked critical activities" (NOT critical path activities)
+               Action: View Schedule →
+               ----------------------------------------------------------------- -->
+          <article class="executive-card" aria-label="Critical Watch Module">
+            <header class="card-top-header">
+              <div class="card-title-group">
+                <h2 class="card-title">Critical Watch</h2>
+                <span class="card-info-icon" data-tooltip="Baseline-marked critical activities tracked for progress variance">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                </span>
+              </div>
+              <span class="card-header-badge">Baseline Focus</span>
+            </header>
+
+            <div class="card-body">
+              <div class="critical-activities-list" id="criticalActivitiesContainer">
+                <!-- Baseline-marked critical activities injected via app.js -->
+              </div>
+            </div>
+
+            <footer class="card-action-footer">
+              <a href="#view-schedule" class="card-action-link">
+                View Schedule
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </footer>
+          </article>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       SEARCH / COMMAND PALETTE MODAL (Ctrl + K)
+       ========================================================================= -->
+  <div id="searchModal" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.75); backdrop-filter:blur(6px); align-items:center; justify-content:center;">
+    <div style="background:#131822; border:1px solid rgba(255,255,255,0.15); border-radius:14px; width:520px; max-width:90vw; padding:16px; box-shadow:0 20px 50px rgba(0,0,0,0.8); display:flex; flex-direction:column; gap:12px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">
+        <span style="font-size:12px; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.05em;">Command Search</span>
+        <button id="searchCloseBtn" style="background:transparent; border:none; color:#94a3b8; cursor:pointer; font-size:13px;">✕</button>
+      </div>
+      <input type="text" id="searchModalInput" placeholder="Jump to activity, discipline, or field update..." style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px 14px; color:#fff; font-size:13px; outline:none;">
+      <div style="font-size:11px; color:#64748b; display:flex; justify-content:space-between;">
+        <span>Press <kbd style="background:rgba(255,255,255,0.1); padding:1px 4px; border-radius:3px;">ESC</kbd> to exit</span>
+        <span>IOCL Paradip EPCC-03</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
