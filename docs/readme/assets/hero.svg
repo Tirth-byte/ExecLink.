@@ -1,0 +1,236 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080D1A"/>
+      <stop offset="50%" stop-color="#0B1329"/>
+      <stop offset="100%" stop-color="#050811"/>
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="50%" stop-color="#14B8A6"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0.0"/>
+    </linearGradient>
+
+    <!-- Node Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1E293B" stroke-width="0.75" stroke-opacity="0.4"/>
+    </pattern>
+
+    <style>
+      .pulse-line {
+        stroke-dasharray: 8 16;
+        animation: flow 3s linear infinite;
+      }
+      .node-pulse {
+        animation: pulse 2.5s ease-in-out infinite;
+      }
+      .glow-packet {
+        animation: travel 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+      @keyframes flow {
+        to {
+          stroke-dashoffset: -48;
+        }
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.4; transform: scale(1); }
+        50% { opacity: 0.85; transform: scale(1.08); }
+      }
+      @keyframes travel {
+        0% { offset-distance: 0%; opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { offset-distance: 100%; opacity: 0; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .pulse-line, .node-pulse, .glow-packet {
+          animation: none;
+        }
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="460" rx="16" fill="url(#bgGrad)"/>
+  <rect width="1200" height="460" rx="16" fill="url(#grid)"/>
+
+  <!-- Subtle ambient glow spheres -->
+  <circle cx="200" cy="120" r="180" fill="#0EA5E9" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="950" cy="300" r="220" fill="#10B981" opacity="0.07" filter="url(#glow)"/>
+
+  <!-- Border Frame -->
+  <rect x="1" y="1" width="1198" height="458" rx="15" fill="none" stroke="#334155" stroke-width="1.2" stroke-opacity="0.5"/>
+
+  <!-- Top Metadata Row -->
+  <g transform="translate(60, 48)">
+    <!-- SIH / Team Innovax Pill -->
+    <rect x="0" y="0" width="310" height="28" rx="14" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+    <circle cx="14" cy="14" r="4" fill="#10B981"/>
+    <text x="26" y="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#94A3B8" letter-spacing="1.2">SMART INDIA HACKATHON 2026 • TEAM INNOVAX</text>
+
+    <!-- Invariant Pill -->
+    <g transform="translate(680, 0)">
+      <rect x="0" y="0" width="400" height="28" rx="14" fill="#0F172A" stroke="#0D9488" stroke-width="1" stroke-opacity="0.4"/>
+      <circle cx="14" cy="14" r="4" fill="#0EA5E9"/>
+      <text x="26" y="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#38BDF8" letter-spacing="0.8">AI PROPOSES • PLANNER VERIFIES • AUDIT SECURES</text>
+    </g>
+  </g>
+
+  <!-- Hero Content Center -->
+  <g transform="translate(60, 115)">
+    <!-- ExecLink Logo Glyph -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="56" height="56" rx="14" fill="#0F172A" stroke="#0EA5E9" stroke-width="1.5" stroke-opacity="0.6"/>
+      <!-- Connected Node Icon -->
+      <circle cx="18" cy="38" r="5" fill="#0EA5E9"/>
+      <circle cx="38" cy="18" r="5" fill="#10B981"/>
+      <circle cx="38" cy="38" r="5" fill="#38BDF8"/>
+      <line x1="18" y1="38" x2="38" y2="18" stroke="#F8FAFC" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="18" y1="38" x2="38" y2="38" stroke="#F8FAFC" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="38" y1="18" x2="38" y2="38" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3"/>
+    </g>
+
+    <!-- Brand Titles -->
+    <g transform="translate(74, 18)">
+      <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif" font-size="28" font-weight="800" fill="#F8FAFC" letter-spacing="3.5">EXECLINK</text>
+      <text x="175" y="-1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif" font-size="13" font-weight="600" fill="#64748B" letter-spacing="2">|  PROJECT CONTROLS INTELLIGENCE</text>
+    </g>
+
+    <!-- Subtitle / Headline -->
+    <g transform="translate(74, 46)">
+      <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif" font-size="18" font-weight="500" fill="#E2E8F0">
+        From Field Reality to Verified Project Progress.
+      </text>
+      <text x="0" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="400" fill="#94A3B8">
+        Reconciling fragmented site observations with L5/L6 baseline schedules through explainable matching and verified trust boundaries.
+      </text>
+    </g>
+  </g>
+
+  <!-- Interactive 5-Stage Architecture Pipeline -->
+  <g transform="translate(60, 240)">
+    <!-- Stage Connectors (Backing Lines) -->
+    <line x1="95" y1="55" x2="985" y2="55" stroke="#1E293B" stroke-width="3"/>
+    <line x1="95" y1="55" x2="985" y2="55" stroke="url(#accentGrad)" stroke-width="2.5" class="pulse-line" stroke-opacity="0.8"/>
+
+    <!-- STAGE 1: FIELD EVENT -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="190" height="110" rx="10" fill="#0F172A" stroke="#334155" stroke-width="1.2"/>
+      <rect x="0" y="0" width="190" height="4" rx="2" fill="#0EA5E9"/>
+      <circle cx="24" cy="26" r="10" fill="#0284C7" fill-opacity="0.2"/>
+      <text x="24" y="30" font-family="monospace" font-size="11" font-weight="700" fill="#38BDF8" text-anchor="middle">01</text>
+      <text x="42" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#F1F5F9">FIELD EVENT</text>
+      <text x="14" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" fill="#94A3B8">Unstructured Site DPR</text>
+      <text x="14" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" fill="#94A3B8">Voice &amp; Conversational</text>
+      <text x="14" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="500" fill="#64748B">Chainage · Asset · Photos</text>
+    </g>
+
+    <!-- STAGE 2: INTELLIGENCE EXTRACTION -->
+    <g transform="translate(222, 0)">
+      <rect x="0" y="0" width="190" height="110" rx="10" fill="#0F172A" stroke="#334155" stroke-width="1.2"/>
+      <rect x="0" y="0" width="190" height="4" rx="2" fill="#06B6D4"/>
+      <circle cx="24" cy="26" r="10" fill="#0891B2" fill-opacity="0.2"/>
+      <text x="24" y="30" font-family="monospace" font-size="11" font-weight="700" fill="#22D3EE" text-anchor="middle">02</text>
+      <text x="42" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#F1F5F9">EXTRACTION</text>
+      <text x="14" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" fill="#94A3B8">Deterministic Entity Parser</text>
+      <text x="14" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" fill="#94A3B8">Work-Type Synonym Dict</text>
+      <text x="14" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="500" fill="#64748B">Structured Event Tuple</text>
+    </g>
+
+    <!-- STAGE 3: EXPLAINABLE MATCHING -->
+    <g transform="translate(445, 0)">
+      <rect x="0" y="0" width="190" height="110" rx="10" fill="#0F172A" stroke="#334155" stroke-width="1.2"/>
+      <rect x="0" y="0" width="190" height="4" rx="2" fill="#14B8A6"/>
+      <circle cx="24" cy="26" r="10" fill="#0D9488" fill-opacity="0.2"/>
+      <text x="24" y="30" font-family="monospace" font-size="11" font-weight="700" fill="#2DD4BF" text-anchor="middle">03</text>
+      <text x="42" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#F1F5F9">AI MATCHER</text>
+      <text x="14" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" fill="#94A3B8">6 Configured Signals</text>
+      <text x="14" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" fill="#94A3B8">Auto-Suggest ≥ 0.90</text>
+      <text x="14" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="500" fill="#2DD4BF">Pure Proposal · No Write</text>
+    </g>
+
+    <!-- STAGE 4: PLANNER VERIFICATION (TRUST BOUNDARY) -->
+    <g transform="translate(668, 0)">
+      <rect x="0" y="0" width="190" height="110" rx="10" fill="#0C1B2E" stroke="#38BDF8" stroke-width="1.5"/>
+      <rect x="0" y="0" width="190" height="4" rx="2" fill="#38BDF8"/>
+      <circle cx="24" cy="26" r="10" fill="#0284C7" fill-opacity="0.3"/>
+      <text x="24" y="30" font-family="monospace" font-size="11" font-weight="700" fill="#38BDF8" text-anchor="middle">04</text>
+      <text x="42" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#38BDF8">VERIFICATION</text>
+      <text x="14" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#F8FAFC">Human Planner Review</text>
+      <text x="14" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" fill="#94A3B8">Inspect Signal Evidence</text>
+      <text x="14" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#F59E0B">TRUST BOUNDARY</text>
+    </g>
+
+    <!-- STAGE 5: VERIFIED ACTUAL PROGRESS -->
+    <g transform="translate(890, 0)">
+      <rect x="0" y="0" width="190" height="110" rx="10" fill="#081F19" stroke="#10B981" stroke-width="1.5"/>
+      <rect x="0" y="0" width="190" height="4" rx="2" fill="#10B981"/>
+      <circle cx="24" cy="26" r="10" fill="#059669" fill-opacity="0.3"/>
+      <text x="24" y="30" font-family="monospace" font-size="11" font-weight="700" fill="#34D399" text-anchor="middle">05</text>
+      <text x="42" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#34D399">PROGRESS</text>
+      <text x="14" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#F8FAFC">L5/L6 Progress Mutation</text>
+      <text x="14" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" fill="#94A3B8">SHA-256 Audit Link</text>
+      <text x="14" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#10B981">Verified System of Record</text>
+    </g>
+  </g>
+
+  <!-- Bottom Technology Bar -->
+  <g transform="translate(60, 395)">
+    <text x="0" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#64748B" letter-spacing="1">STACK ARCHITECTURE</text>
+    <g transform="translate(160, 8)">
+      <rect x="0" y="0" width="70" height="24" rx="6" fill="#0F172A" stroke="#334155" stroke-width="0.8"/>
+      <text x="35" y="16" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" fill="#94A3B8" text-anchor="middle">Next.js 16</text>
+    </g>
+    <g transform="translate(238, 8)">
+      <rect x="0" y="0" width="76" height="24" rx="6" fill="#0F172A" stroke="#334155" stroke-width="0.8"/>
+      <text x="38" y="16" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" fill="#94A3B8" text-anchor="middle">React 19</text>
+    </g>
+    <g transform="translate(322, 8)">
+      <rect x="0" y="0" width="72" height="24" rx="6" fill="#0F172A" stroke="#334155" stroke-width="0.8"/>
+      <text x="36" y="16" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" fill="#94A3B8" text-anchor="middle">Flutter 3</text>
+    </g>
+    <g transform="translate(402, 8)">
+      <rect x="0" y="0" width="76" height="24" rx="6" fill="#0F172A" stroke="#334155" stroke-width="0.8"/>
+      <text x="38" y="16" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" fill="#94A3B8" text-anchor="middle">FastAPI</text>
+    </g>
+    <g transform="translate(486, 8)">
+      <rect x="0" y="0" width="72" height="24" rx="6" fill="#0F172A" stroke="#334155" stroke-width="0.8"/>
+      <text x="36" y="16" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" fill="#94A3B8" text-anchor="middle">Python</text>
+    </g>
+    <g transform="translate(566, 8)">
+      <rect x="0" y="0" width="90" height="24" rx="6" fill="#0F172A" stroke="#334155" stroke-width="0.8"/>
+      <text x="45" y="16" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" fill="#94A3B8" text-anchor="middle">TypeScript</text>
+    </g>
+    <g transform="translate(664, 8)">
+      <rect x="0" y="0" width="86" height="24" rx="6" fill="#0F172A" stroke="#334155" stroke-width="0.8"/>
+      <text x="43" y="16" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" fill="#94A3B8" text-anchor="middle">PostgreSQL</text>
+    </g>
+    <g transform="translate(758, 8)">
+      <rect x="0" y="0" width="70" height="24" rx="6" fill="#0F172A" stroke="#334155" stroke-width="0.8"/>
+      <text x="35" y="16" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" fill="#94A3B8" text-anchor="middle">SQLite</text>
+    </g>
+
+    <!-- Right-aligned SHA-256 Badge -->
+    <g transform="translate(900, 8)">
+      <circle cx="10" cy="12" r="4" fill="#10B981"/>
+      <text x="20" y="16" font-family="monospace" font-size="11" font-weight="600" fill="#10B981">SHA-256 AUDIT LINK</text>
+    </g>
+  </g>
+</svg>
