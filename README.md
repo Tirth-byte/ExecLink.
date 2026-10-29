@@ -1,7 +1,7 @@
 # ExecLink
 
 <p align="center">
-  <img src="docs/readme/assets/hero.png" alt="ExecLink — The Planning-to-Execution Intelligence Layer" width="100%">
+  <img src="docs/readme/assets/hero.svg" alt="ExecLink — The Planning-to-Execution Intelligence Layer" width="100%">
 </p>
 
 <p align="center">
